@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "ee74b8f0-f192-44bc-830d-f1b472fbbe56",
+		"name": "Blog-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16088335"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/register",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["register"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/auth/login",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["auth", "login"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/auth/logout",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["auth", "logout"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "s%3AeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUnl1ayIsInVzZXJJZCI6IjY0NzFlMjI3MTBhYzVkNmRmYzYxYzc3ZSIsImlhdCI6MTY4NTE4NTQ3NCwiZXhwIjoxNjg1MjcxODc0fQ.lOXYhCRJG1BOQQ3ebletlJggAKTkfh5ra5Ff8AGBVDI.MuU8nsdB%2B3rWtymUhmHBRyczwDstoY9ArF%2FyTqi215I; Path=/; Expires=Sun, 28 May 2023 11:04:34 GMT; HttpOnly; Secure",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/posts",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["posts"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Posts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/posts",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["posts"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/posts/6471f02cca0f4b7d8a624529",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["posts", "6471f02cca0f4b7d8a624529"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/posts/6471f02cca0f4b7d8a624529",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["posts", "6471f02cca0f4b7d8a624529"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/posts/6471f3afdf5d35de683d2509",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["posts", "6471f3afdf5d35de683d2509"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Current User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/showMe",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["users", "showMe"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/updateUser",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["users", "updateUser"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/updatePassword",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["users", "updatePassword"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/posts/upload",
+					"host": ["http://localhost:3000/api/v1"],
+					"path": ["posts", "upload"]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,68 +1,92 @@
 const Post = require('../models/Post');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
-const path = require('path');
 
-const createPost = async (req, res) => {
+const createPost = async (req, res, next) => {
 	req.body.user = req.user.userId;
-	const post = await Post.create(req.body);
-	res.status(StatusCodes.CREATED).json({ post });
+
+	try {
+		const post = await Post.create(req.body);
+		res.status(StatusCodes.CREATED).json({ post });
+	} catch (error) {
+		next(error);
+	}
 };
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = async (req, res, next) => {
 	const { message, author } = req.query;
-	const queryObject = {};
 
-	if (message) {
-		queryObject.message = { message };
+	try {
+		const queryObject = {};
+
+		if (message) {
+			queryObject.message = { message };
+		}
+
+		if (author) {
+			queryObject.author = { author };
+		}
+
+		let result = Post.find(queryObject);
+		const page = Number(req.query.page) || 1;
+		const limit = Number(req.query.limit) || 20;
+		const skip = (page - 1) * limit;
+
+		result = result.skip(skip).limit(limit);
+
+		const posts = await result;
+		res.status(StatusCodes.OK).json({ posts, count: posts.length });
+	} catch (error) {
+		next(error);
 	}
-
-	if (author) {
-		queryObject.author = { author };
-	}
-
-	let result = Product.find(queryObject);
-	const page = Number(req.query.page) || 1;
-	const limit = Number(req.query.limit) || 20;
-	const skip = (page - 1) * limit;
-
-	result = result.skip(skip).limit(limit);
-
-	const posts = await result;
-	res.status(StatusCodes.OK).json({ posts, count: posts.length });
 };
 
-const getSinglePost = async (req, res) => {
-	const { id: productId } = req.params;
-	const post = await Post.findOne({ _id: productId });
+const getSinglePost = async (req, res, next) => {
+	const { id: postId } = req.params;
 
-	if (!post) {
-		throw new CustomError.NotFoundError(`No post found with ${productId} id.`);
+	try {
+		const post = await Post.findOne({ _id: postId });
+
+		if (!post) {
+			throw new CustomError.NotFoundError(`No post found with ${postId} id.`);
+		}
+		res.status(StatusCodes.OK).json({ post });
+	} catch (error) {
+		next(error);
 	}
-	res.status(StatusCodes.OK).json({ post });
 };
 
-const updatePost = async (req, res) => {
-	const { id: productId } = req.params;
-	const post = await Post.findOneAndUpdate({ _id: productId }, req.body, {
-		new: true,
-		runValidators: true,
-	});
+const updatePost = async (req, res, next) => {
+	const { id: postId } = req.params;
 
-	if (!post) {
-		throw new CustomError.NotFoundError(`No post found with ${productId} id.`);
+	try {
+		const post = await Post.findOneAndUpdate({ _id: postId }, req.body, {
+			new: true,
+			runValidators: true,
+		});
+
+		if (!post) {
+			throw new CustomError.NotFoundError(`No post found with ${postId} id.`);
+		}
+		res.status(StatusCodes.OK).json({ post });
+	} catch (error) {
+		next(error);
 	}
-	res.status(StatusCodes.OK).json({ post });
 };
 
-const deletePost = async (req, res) => {
-	const { id: productId } = req.params;
-	const post = await Post.findOneAndDelete({ _id: productId });
+const deletePost = async (req, res, next) => {
+	const { id: postId } = req.params;
 
-	if (!post) {
-		throw new CustomError.NotFoundError(`No post found with ${productId} id.`);
+	try {
+		const post = await Post.findOneAndDelete({ _id: postId });
+
+		if (!post) {
+			throw new CustomError.NotFoundError(`No post found with ${postId} id.`);
+		}
+		res.status(StatusCodes.OK).json({ post });
+	} catch (error) {
+		next(error);
 	}
-	res.status(StatusCodes.OK).json({ post });
 };
 
 module.exports = {

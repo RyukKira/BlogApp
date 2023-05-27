@@ -5,7 +5,6 @@ const PostSchema = new mongoose.Schema(
 		message: {
 			text: {
 				type: String,
-				required: [true, 'Please write a message about your post.'],
 			},
 			media: {
 				type: Buffer,

@@ -25,7 +25,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 		customError.statusCode = StatusCodes.NOT_FOUND;
 	}
 
-	return res.status(CustomError.statusCode).json({ msg: customError.msg });
+	return res.status(customError.statusCode).json({ msg: customError.msg });
 };
 
 module.exports = errorHandlerMiddleware;
